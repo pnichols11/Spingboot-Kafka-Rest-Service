@@ -1,0 +1,33 @@
+# Set the tomcat server port
+server:
+  port: 8083
+# Spring settings
+spring:
+# disables the SpringBoot banner
+  main:
+      banner-mode: "off"
+# Kafka Settings.      
+  kafka:
+    # This will need to change according to your brokers and ports spanned. Localhost for demo only!
+    bootstrap-servers: tcp://192.168.2.240:9093
+    
+    consumer:
+     # The group should be changed to your identifiable groups. test-group is for example only.
+      group-id: test-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+  app:
+     topic:
+       #Topic should be changed to listener and publisher topic name. test.t is for sample only.
+       test-example: test.t
+# Change logging level depending upon development and code promotion stage.
+logging:
+  level:
+    root: WARN
+    org.springframework.web: INFO
+    com.clc.springboot: DEBUG
